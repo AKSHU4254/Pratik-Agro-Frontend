@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import FruitAndVegBackground from '../Subcomponent/FruitAndVegBackground'
 import Posts from '../Subcomponent/post_fruit_and_veg'
 
-export type post = {
-  id: number,
-  title: string,
-  image: string,
+export type post={
+  _id: number;
+  FruitAndVegproductimg: string;
+  fname9: string;
 }
 
 type IFruitandVeg = {}
@@ -17,33 +18,36 @@ const FruitandVeg  = (props:IFruitandVeg ) => {
   const  search=(searchvalue:string)=>{
         setsearchItem(searchvalue)
   }
-  const [post, setPost] = useState<post[]>([]);
+  const [post, setpost] = useState<post[]>([]);
+  console.log(post)
+  const getUserData4 = async () => {
+    const res4 = await axios.get("https://pratik-agro-backend.vercel.app/getFruitAndVegproductimg", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res4.data.status === 401 || !res4.data) {
+      console.log("error");
+    } else {
+      setpost(res4.data.getImage.reverse());
+    }
+  };
 
   useEffect(() => {
-    const fetchPost = async () => {
-      const res = await axios.get<post[]>('https://jsonplaceholder.typicode.com/posts');
-      var data = Object.values(res.data);
-      var x: post[] = [];
-      data.forEach(element => {
-        x.push({ "id": element.id, "title": element.title, "image": "https://avatars.githubusercontent.com/u/108678691?v=4" });
-      });
-      setPost(x);
-    }
-    fetchPost();
-  }, [])
+    getUserData4();
+  }, []);
 
 
   return(
     <>
      
-     <div className='fruitandvegbgproduct1 img-fluid'>
-        <div className='abouttext text-white'>
-          <h2 className='Headabouttext'>Fruits &
-             Vegetables</h2>
-        </div>
-
+     {/* <div className='fruitandvegbgproduct1 img-fluid'>
+     <div className="text-block3">
+                <p className='text-white text-decoration-none'><h1>Fruit & Vegatable</h1></p>
       </div>
 
+      </div> */}
+       <FruitAndVegBackground/>
       <div className='container'>
         <div className='row mt-5 '>
          <div className='col-md-8'>

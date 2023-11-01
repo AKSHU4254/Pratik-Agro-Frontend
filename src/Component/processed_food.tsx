@@ -2,11 +2,12 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import Posts from '../Subcomponent/postOfproccesedfood'
+import ProcessedFoodBackground from '../Subcomponent/ProcessedFoodBackground'
 
-export type post = {
-  id: number,
-  title: string,
-  image: string,
+export type post={
+  _id: number;
+  ProcessedFoodProductimg: string;
+  fname11: string;
 }
 
 type IProcessed_Food = {}
@@ -17,33 +18,32 @@ const Processed_Food  = (props:IProcessed_Food ) => {
   const  search=(searchvalue:string)=>{
         setsearchItem(searchvalue)
   }
-  const [post, setPost] = useState<post[]>([]);
+  const [post, setpost] = useState<post[]>([]);
+  console.log(post)
+  const getUserData4 = async () => {
+    const res4 = await axios.get("https://pratik-agro-backend.vercel.app/getProcessedFoodproductimg", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res4.data.status === 401 || !res4.data) {
+      console.log("error");
+    } else {
+      setpost(res4.data.getImage.reverse());
+    }
+  };
 
   useEffect(() => {
-    const fetchPost = async () => {
-      const res = await axios.get<post[]>('https://jsonplaceholder.typicode.com/posts');
-      var data = Object.values(res.data);
-      var x: post[] = [];
-      data.forEach(element => {
-        x.push({ "id": element.id, "title": element.title, "image": "https://avatars.githubusercontent.com/u/108678691?v=4" });
-      });
-      setPost(x);
-    }
-    fetchPost();
-  }, [])
+    getUserData4();
+  }, []);
 
 
   return(
     <>
      
-     <div className='bgproceddfood img-fluid'>
-        <div className='abouttext text-white'>
-          <h2 className='Headabouttext'>Processed Food</h2>
-        </div>
+    
 
-      </div>
-
-
+     <ProcessedFoodBackground />
       <div className='container'>
         <div className='row mt-5 '>
          <div className='col-md-8'>

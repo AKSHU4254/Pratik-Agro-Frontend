@@ -1,57 +1,86 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import BackgroundGallary from '../Subcomponent/BackgroundGallary';
+
+
 import { default as PostsOfGallery } from '../Subcomponent/Postofgallary';
 
 export type post = {
   id: number,
-  title: string,
-  image: string
+  fname15: string,
+  GallaryProductimg: string
+ 
+  
+ 
 }
 
 
 
 
-type ICereals = {}
+type Igallary = {}
 
-const Gallary = (props: ICereals) => {
-  const [post, setPost] = useState<post[]>([]);
+const Gallary = (props: Igallary) => {
+  // const [post, setPost] = useState<post[]>([]);
+   
+  // useEffect(() => {
+  //   const fetchPost = async () => {
+  //     const res = await axios.get<post[]>('http://localhost:4000/getGallaryProductimg');
+      
+  //     var data = Object.values(res.data.getImage);
+     
+  //     var x: post[] = [];
+  //     data.forEach(element => {
+  //       x.push({ "id": element.id, "fname15": element.fname15, "GallaryProductimg": element.GallaryProductimg });
+  //     });
+  //     setPost(x);
+  //   }
+  //   fetchPost();
+  // }, [])
+  const [post, setpost] = useState<post[]>([]);
+  console.log(post)
+  const getUserData4 = async () => {
+    const res4 = await axios.get("https://pratik-agro-backend.vercel.app/getGallaryProductimg", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(res4)
+    if (res4.data.status === 401 || !res4.data) {
+      console.log("error");
+    } else {
+      setpost(res4.data.getImage);
+    }
+  };
 
   useEffect(() => {
-    const fetchPost = async () => {
-      const res = await axios.get<post[]>('https://fakestoreapi.com/products');
-      var data = Object.values(res.data);
-      var x: post[] = [];
-      data.forEach(element => {
-        x.push({ "id": element.id, "title": element.title, "image": element.image });
-      });
-      setPost(x);
-    }
-    fetchPost();
-  }, [])
-
+    getUserData4();
+  }, []);
 
 
   return (
     <>
-
-      <div className='gallaryBgproduct img-fluid'>
-        <div className='abouttext text-white'>
-          <h2 className='Headabouttext'>Gallery</h2>
-        </div>
-
+    
+   
+      <BackgroundGallary />
+     
+      <div >
+      <h1 className='ourGallary container '>Our Gallery</h1>
       </div>
-      <div>
-        <b><h2 className='ourproduct container '>Our Gallery</h2></b>
+      <div className=''>
+      
+        <h1 className=' container '>Gallery of our Products</h1>
       </div>
-      <div>
-        <h1 className=' container mt-5 '>Gallery of our Products</h1>
-      </div>
-
-      <div className='container text-center'>
-        <div className='row mt-5 text-center'>
+      
+      
+      <div className='bgimgforhomegallary2'>
+       <div className='container text-center'>
+        <div className='row text-center'>
           <PostsOfGallery posts={post} />
         </div>
       </div>
+      </div>
+       
+      
     </>
   )
 }

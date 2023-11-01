@@ -10,14 +10,17 @@ const Footer:React.FunctionComponent<IFooter> =(props)=>{
     <>
      <footer className='bg-dark text-white pt-5 pb-4'>
         <div className=' text-center text-md-left'>
-            <div className='row text-center text-md-left'>
-                <div className='col-md-4 col-lg-3 col-xl-3 mx-auto mt-3'>
-                    <img src="images/logo.png" alt="logo" className='navbar-brand mb-4' />
+            <div className='row text-center '>
+                <div className='col-md-4  homeText'>
+                    <img src="images/logo.png" alt="logo" className='navbar-brand mb-4 img-fluid' />
                     <p>PRATIK AGRO EXPORTS is one of the fastest growing company engaged in supplying and exporting a diverse range of Agro Products</p>
-                    <div className="flex-container text-center justify-content-center">
+                    <div className="flex-container text-center  homeText">
 
                         <div>
                             <i className="bi bi-twitter  bg-success rounded-circle"></i>
+                        </div>
+                        <div>
+                            <i className="bi bi-instagram  bg-success rounded-circle"></i>
                         </div>
                         <div>
                             <i className="bi bi-linkedin bg-success rounded-circle"></i>
@@ -27,7 +30,7 @@ const Footer:React.FunctionComponent<IFooter> =(props)=>{
                         </div>
                     </div>
                 </div>
-                <div className='col-md-4 col-lg-2 col-xl-2 mx-auto mt-3'>
+                <div className='col-md-4  homeText'>
                      <h3>Contact Info</h3>
                      <h5>ADDRESS</h5>
                      <p>Near Jain Temple, At PO: Vasada, 
@@ -45,7 +48,7 @@ const Footer:React.FunctionComponent<IFooter> =(props)=>{
 
                 </div>
 
-                <div className='col-md-4 col-lg-2 col-xl-2 mx-auto mt-3'>
+                <div className='col-md-4  homeText'>
                     <h3>Main Menu</h3>
                     <p>
                         <Link to='/' className='text-white text-decoration-none'>Home</Link>
@@ -74,16 +77,19 @@ const Footer:React.FunctionComponent<IFooter> =(props)=>{
 
 
            <hr className='mb-4'></hr>
-            <div className='row align-item-center'>
-                <div className='col-md-7 col-lg-8'>
-                    <p>
+           <div className='container'>
+           <div className='row '>
+               
+                    <p className='homeText'>
                         © 2023 Pratik Agro Exports. All Rights Reserved.
                     </p>
 
-                </div>
+                
                  
 
             </div>
+           </div>
+            
         </div>
      </footer>
     

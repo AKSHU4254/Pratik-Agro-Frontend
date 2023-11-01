@@ -11,37 +11,22 @@ const PostsOfGallery = ({ posts }: PostProp) => {
         return <h2>Loading...</h2>
     }
     const [currentPage, setCurrentPage] = useState<number>(0);
-    const [postPerPage] = useState(18);
+    const [postPerPage] = useState(16);
     const currentPost = posts.slice(postPerPage * currentPage, postPerPage * (currentPage + 1))
     return (
         <>
-            {currentPost.map((post) =>
-
-                // <div className=' col-md-4' key={post.id} >
-                //     <div className="card">
-                //         <div className="card-body">
-                //             <h5 className='card-title'>{post.title}</h5>
-                //         </div>
-                //         <div>
-                //             <img src={post.image} style={{ "width": "12rem" }} />
-                //         </div>
-                //     </div>
-                // </div>
-                <div className="col-md-4"  key={post.id}>
-                    <div className="card border-white mt-5 text-center p-5"  >
-                         <img src={post.image} className="card-img-top img-fluid" alt="..." style={{ "width": "10rem" }} />
-                        
-                           
-                           
-                            
-
-                        
-                    </div>
-                </div>
-                // <div className='col-md-6' key={post.id}>
-                //     <h5>{post.id}: {post.title}</h5>
-                // </div>
-            )}
+            {currentPost.map((post) => (
+        <div className="col-md-3 mt-5" key={post.id}>
+          <div className="card border-0 text-center bg-transparent">
+            <img
+              src={post.GallaryProductimg}
+              className="card-img-top img-fluid"
+              alt="..."
+              style={{ width: "300px", height: "200px" }}
+            />
+          </div>
+        </div>
+      ))}
             <Pagination postPerPage={postPerPage} totalPost={posts.length} paginate={(e) => setCurrentPage(e)} />
         </>
     )

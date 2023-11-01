@@ -1,4 +1,7 @@
 import React from 'react'
+import ScrollToTopButton from '../Subcomponent/Scrolltop'
+import WininternationalTradeBackground from '../Subcomponent/WininternationalTradeBackground.tsx'
+import RegisterMembers from '../Subcomponent/RegisterMembers'
 
 
 
@@ -7,40 +10,35 @@ export interface Iwin_international_Trade { }
 const Win_international_Trade: React.FunctionComponent<Iwin_international_Trade> = (props) => {
   return (
     <>
-      <div className='bgwin_internation img-fluid'>
-        <div className='abouttext text-white'>
-          <h2 className='Headabouttext'>Win International Trade</h2>
-        </div>
-
-      </div>
-
+      
+       <WininternationalTradeBackground />
       <div className="container">
         <div className="row mt-5">
           <div className="col-md-4">
-            <div className="card  border-white rounded-circle text-center shadow-lg p-3 mb-5 rounded" >
-              <a href="#"> <img src="images/win_internationalpagelogo.png" alt="..." style={{ "width": "13rem" }} className='img-fluid' /></a>
+            <div className="card  border-white  text-center  p-3 mb-5 " >
+              <a href="#"> <img src="images/international trade logo.jpeg" alt="..." style={{ "width": "15rem" ,"height": "15rem" }} className='img-fluid' /></a>
+
+            </div>
+          </div>
+          <div className="col-md-4 textcard">
+            <div className="card border-white  text-center mb-5 "  >
+              <a href="#"> <img src="images/wininternatioanllogo2.png" alt="..." style={{ "width": "15rem" }} className='img-fluid ' /></a>
 
             </div>
           </div>
           <div className="col-md-4">
-            <div className="card border-white  text-center "  >
-              <a href="#"> <img src="images/wininternatioanllogo2.png" alt="..." style={{ "width": "15rem" }} className='img-fluid' /></a>
-
-            </div>
-          </div>
-          <div className="col-md-4">
-            <div className="card  border-white rounded-circle text-center shadow-lg p-3 mb-5  rounded" >
-              <a href="#"> <img src="images/logo.png" alt="..." style={{ "width": "15rem", "height": "11rem" }} className='img-fluid' /></a>
+            <div className="card  border-white  text-center  p-3 mb-5 " >
+              <a href="#"> <img src="images/pratikagrowinlogo.jpeg" alt="..." style={{ "width": "15rem", "height": "15rem" }} className='img-fluid' /></a>
 
             </div>
           </div>
 
         </div>
       </div>
-
+      <ScrollToTopButton />
       <div className='container'>
-        <h2 className='ourproduct container '>Welcome to Win International Trade</h2>
-        <h1>Win International Is An Internationally<br/> 
+        <h2 className='ourproduct container'>Welcome to Win International Trade</h2>
+        <h1 className='mt-5'>Win International Is An Internationally<br/> 
                  Acclaimed Indenting & Sourcing Agent In India.</h1>
         <div className='mt-5'>
          <p>Our Main Activities Involves Promotion Of International Trade For Various Industries Such As Agro, Pesticides, Paints, Coating, Resins, Specialty Chemicals, Organics & Inorganics, Dyes, Pharma, Bulk Drugs & Api, Construction & Water Treatment, Electronics, Plastic And Polymers, Rubber & Textiles And Many Many More.<br/>
@@ -82,10 +80,11 @@ const Win_international_Trade: React.FunctionComponent<Iwin_international_Trade>
                 <b><h2 className='ourproduct container text-center '>Members</h2></b>
             </div>
             <div>
-                <b><h1 className=' container text-center '>Registered Member of</h1></b>
+                <b><h1 className=' container text-center mt-5'>Registered Member of</h1></b>
             </div>
 
-            <div className="container ">
+            <RegisterMembers/>
+            {/* <div className="container ">
                 <div className="row g-5 mt-4">
                     <div className="col-md-3">
                         <div className="card border-white text-center"  >
@@ -115,7 +114,7 @@ const Win_international_Trade: React.FunctionComponent<Iwin_international_Trade>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
     </>
   )

@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
 import { Link, NavLink } from 'react-router-dom';
+import CerealsBackground from '../Subcomponent/CerealsBackground';
 import Posts from '../Subcomponent/Posts';
 
 
-export type post = {
-  id: number,
-  title: string,
-  image: string,
+export type post={
+  _id: number;
+  cerealsProductimg: string;
+  fname7: string;
 }
 
 
@@ -17,37 +18,42 @@ type ICereals = {}
 
 const Cereals = (props: ICereals) => {
   const[searchItem,setsearchItem] =useState('')
-
+    console.log(searchItem)
   const  search=(searchvalue:string)=>{
         setsearchItem(searchvalue)
   }
-  const [post, setPost] = useState<post[]>([]);
+  const [post, setpost] = useState<post[]>([]);
+  console.log("Cerealas")
+  console.log(post)
+  const getUserData4 = async () => {
+    const res4 = await axios.get("https://pratik-agro-backend.vercel.app/getCerealsProductImg", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (res4.data.status === 401 || !res4.data) {
+      console.log("error");
+    } else {
+      setpost(res4.data.getImage.reverse());
+    }
+  };
 
   useEffect(() => {
-    const fetchPost = async () => {
-      const res = await axios.get<post[]>('https://jsonplaceholder.typicode.com/posts');
-      var data = Object.values(res.data);
-      var x: post[] = [];
-      data.forEach(element => {
-        x.push({ "id": element.id, "title": element.title, "image": "https://avatars.githubusercontent.com/u/108678691?v=4" });
-      });
-      setPost(x);
-    }
-    fetchPost();
-  }, [])
+    getUserData4();
+  }, []);
 
 
 
   return (
     <>
 
-      <div className='cerealbgproduct1 img-fluid'>
-        <div className='abouttext text-white'>
-          <h2 className='Headabouttext'>Cereals</h2>
-        </div>
+      {/* <div className='cerealbgproduct1 img-fluid'>
+      <div className="text-block3">
+                <p className='text-white text-decoration-none'><h1>Cereals</h1></p>
+       </div>
 
-      </div>
-
+      </div> */}
+        <CerealsBackground />
       <div className='container'>
         <div className='row mt-5 '>
           <div className='col-md-8'>
@@ -107,7 +113,7 @@ const Cereals = (props: ICereals) => {
                 <NavLink to='/Cereals' className=' text-dark text-decoration-none'>Cereals</NavLink>
               </p>
               <p>
-                <Link to='/Fruit_and_veg' className=' text-dark text-decoration-none'>Fruits and vegetables </Link>
+                <Link to='/Fruit_and_veg' className=' text-dark text-decoration-none'><span>Fruits and vegetables</span></Link>
               </p>
               <p>
                 <Link to='/Processed_food' className=' text-dark text-decoration-none'>Processed Food</Link>

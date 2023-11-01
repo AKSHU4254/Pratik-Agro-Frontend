@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import captchaImg from "../../public/images/captchaImg.png";
 
 function generateString(length: number) {
@@ -10,14 +11,22 @@ function generateString(length: number) {
     }
     return result;
 }
-
-function Captcha() {
-
+export interface capchaProp {
+   isVerified:boolean,
+   setIsVerified:Dispatch<SetStateAction<boolean>>
+  }
+  
+//function Captcha(props) {
+    const Captcha = ({ isVerified, setIsVerified}: capchaProp ) => {
     const [captcha, setcaptcha] = useState('');
-
+   
     useEffect(() => {
         setcaptcha(generateString(6));
     }, [])
+
+    const refreshCaptcha = () => {
+        setcaptcha(generateString(6));
+    };
 
 
     const onSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -34,6 +43,7 @@ function Captcha() {
             element.disabled = true;
             element.style.cursor = "not-allowed";
             inputData.style.display = "none";
+            setIsVerified(true);
         } else {
             element.style.backgroundColor = "red";
             element.style.cursor = "not-allowed";
@@ -46,7 +56,7 @@ function Captcha() {
                 element.innerHTML = "Verify Captcha";
                 element.disabled = false;
                 inputData.disabled = false;
-                 inputData.value = 'sssss';
+                 inputData.value = "";
             };
             setTimeout(myFunction, 5000);
         }
@@ -59,11 +69,21 @@ function Captcha() {
                 <div className="d-flex gap-2">
                     <h4 id="captcha" className='pt-2 px-2 text-center' style={{ position: "absolute", width: "100px" }} >{captcha}</h4>
                     <img src={captchaImg} className="img-fluid" height="50px" width={"100px"} />
-                    <input type="text" id="inputType" placeholder="Enter Captcha" name="username" className='form-control' />
+                    <input type="text" id="inputType" placeholder="Enter Captcha" name="username" className='form-control' autoComplete='off' />
                     <button type="button" id="successBTN" onClick={onSubmit} className="btn btn-primary ml-1">Verify&nbsp;Captcha</button>
+                </div>
+                <div>
+                    <p className='mt-2 text-center'>
+                        Can't read the image?
+                        <Link to='' onClick={refreshCaptcha}>
+                            Click Here
+                        </Link>{' '}
+                        to Refresh
+                    </p>
                 </div>
             </div>
         </div>
     );
 }
+
 export default Captcha;
